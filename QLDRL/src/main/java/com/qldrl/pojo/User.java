@@ -4,6 +4,7 @@
  */
 package com.qldrl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -21,9 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -55,10 +59,10 @@ public class User implements Serializable {
     @Size(max = 50)
     @Column(name = "username")
     private String username;
-    @Size(max = 50)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+// @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 100)
     @Column(name = "email")
     private String email;
@@ -70,37 +74,53 @@ public class User implements Serializable {
     private String masinhvien;
     @Column(name = "ngaysinh")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date ngaysinh;
     @Size(max = 10)
     @Column(name = "gioitinh")
     private String gioitinh;
     @Column(name = "ngaytao")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date ngaytao;
-    @Size(max = 100)
+    @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
+    @Size(max = 20)
+    @Column(name = "user_role")
+    private String userRole;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Dangkyhoatdong> dangkyhoatdongSet;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Diemrenluyen> diemrenluyenSet;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Binhluan> binhluanSet;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Baothieu> baothieuSet;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Thich> thichSet;
     @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
     private Set<Hoatdong> hoatdongSet;
-    @JoinColumn(name = "idChucVu", referencedColumnName = "id")
-    @ManyToOne
-    private Chucvu idChucVu;
+    @OneToMany(mappedBy = "idUser")
+    @JsonIgnore
+    private Set<Thanhtich> thanhtichSet;
     @JoinColumn(name = "idKhoa", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Khoa idKhoa;
     @JoinColumn(name = "idLopHoc", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Lophoc idLopHoc;
+    
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
@@ -160,8 +180,7 @@ public class User implements Serializable {
     public Date getNgaysinh() {
         return ngaysinh;
     }
-
-    public void setNgaysinh(Date ngaysinh) {
+public void setNgaysinh(Date ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
@@ -187,6 +206,14 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     @XmlTransient
@@ -243,12 +270,13 @@ public class User implements Serializable {
         this.hoatdongSet = hoatdongSet;
     }
 
-    public Chucvu getIdChucVu() {
-        return idChucVu;
+    @XmlTransient
+    public Set<Thanhtich> getThanhtichSet() {
+        return thanhtichSet;
     }
 
-    public void setIdChucVu(Chucvu idChucVu) {
-        this.idChucVu = idChucVu;
+    public void setThanhtichSet(Set<Thanhtich> thanhtichSet) {
+        this.thanhtichSet = thanhtichSet;
     }
 
     public Khoa getIdKhoa() {
@@ -284,12 +312,26 @@ public class User implements Serializable {
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
-        return true;
+return true;
     }
 
     @Override
     public String toString() {
         return "com.qldrl.pojo.User[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

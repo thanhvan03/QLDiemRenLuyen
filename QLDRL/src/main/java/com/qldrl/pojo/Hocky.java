@@ -4,6 +4,7 @@
  */
 package com.qldrl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author PC
+ * @author DELL
  */
 @Entity
 @Table(name = "hocky")
@@ -46,7 +47,11 @@ public class Hocky implements Serializable {
     @Column(name = "namhoc")
     private Integer namhoc;
     @OneToMany(mappedBy = "idHocKy")
+    @JsonIgnore
     private Set<Hoatdong> hoatdongSet;
+    @OneToMany(mappedBy = "idHocKy")
+    @JsonIgnore
+    private Set<Thanhtich> thanhtichSet;
 
     public Hocky() {
     }
@@ -86,6 +91,15 @@ public class Hocky implements Serializable {
 
     public void setHoatdongSet(Set<Hoatdong> hoatdongSet) {
         this.hoatdongSet = hoatdongSet;
+    }
+
+    @XmlTransient
+    public Set<Thanhtich> getThanhtichSet() {
+        return thanhtichSet;
+    }
+
+    public void setThanhtichSet(Set<Thanhtich> thanhtichSet) {
+        this.thanhtichSet = thanhtichSet;
     }
 
     @Override

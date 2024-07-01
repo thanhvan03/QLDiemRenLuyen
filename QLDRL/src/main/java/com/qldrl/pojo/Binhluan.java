@@ -4,6 +4,7 @@
  */
 package com.qldrl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,10 +22,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author PC
+ * @author DELL
  */
 @Entity
 @Table(name = "binhluan")
@@ -50,9 +52,11 @@ public class Binhluan implements Serializable {
     private Date ngaybinhluan;
     @JoinColumn(name = "idHoatDong", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Hoatdong idHoatDong;
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     @ManyToOne
+//    @JsonIgnore
     private User idUser;
 
     public Binhluan() {
@@ -90,6 +94,7 @@ public class Binhluan implements Serializable {
         return idHoatDong;
     }
 
+    @XmlTransient
     public void setIdHoatDong(Hoatdong idHoatDong) {
         this.idHoatDong = idHoatDong;
     }
@@ -98,6 +103,7 @@ public class Binhluan implements Serializable {
         return idUser;
     }
 
+    @XmlTransient
     public void setIdUser(User idUser) {
         this.idUser = idUser;
     }

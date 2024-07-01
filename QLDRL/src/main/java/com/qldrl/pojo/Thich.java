@@ -4,6 +4,7 @@
  */
 package com.qldrl.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,10 +21,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author PC
+ * @author DELL
  */
 @Entity
 @Table(name = "thich")
@@ -45,9 +47,11 @@ public class Thich implements Serializable {
     private Date ngaythich;
     @JoinColumn(name = "idHoatDong", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Hoatdong idHoatDong;
     @JoinColumn(name = "idUser", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private User idUser;
 
     public Thich() {
@@ -77,6 +81,7 @@ public class Thich implements Serializable {
         return idHoatDong;
     }
 
+    @XmlTransient
     public void setIdHoatDong(Hoatdong idHoatDong) {
         this.idHoatDong = idHoatDong;
     }
@@ -85,6 +90,7 @@ public class Thich implements Serializable {
         return idUser;
     }
 
+    @XmlTransient
     public void setIdUser(User idUser) {
         this.idUser = idUser;
     }

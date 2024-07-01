@@ -14,6 +14,7 @@
     <class>com.qldrl.pojo.Hocky</class>
     <class>com.qldrl.pojo.Diemrenluyen</class>
     <class>com.qldrl.pojo.Thich</class>
+    <class>com.qldrl.pojo.Thanhtich</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlydrl?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

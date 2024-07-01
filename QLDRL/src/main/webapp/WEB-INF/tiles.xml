@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    <definition name="hoatdong" extends="baseLayout">
+        <put-attribute name="title" value="Thêm Hoạt Động" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/hoatdong.jsp" />
+    </definition>
+    <definition name="danhsachhoatdong" extends="baseLayout">
+        <put-attribute name="title" value="Quản Lý Hoạt Động" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/danhsachhoatdong.jsp" />
+    </definition>
+    <definition name="baothieu" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách báo thiếu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/baothieu.jsp" />
+    </definition>     
+    <definition name="thanhtichsv" extends="baseLayout">
+        <put-attribute name="title" value="Xem thành tích sinh viên" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thanhtichsv.jsp" />
+    </definition>      
+    <definition name="baothieutheokhoa" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách báo thiếu theo khoa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/baothieutheokhoa.jsp" />
+    </definition>   
+    <definition name="thongkekhoa" extends="baseLayout">
+        <put-attribute name="title" value="Thống kê báo cáo" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thongkekhoa.jsp" />
+    </definition> 
+    <definition name="thongkelop" extends="baseLayout">
+        <put-attribute name="title" value="Thống kê báo cáo" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/thongkelop.jsp" />
+    </definition> 
+    <definition name="danhsachdangky" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách đăng ký hoạt động" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/danhsachdangky.jsp" />
+    </definition> 
+    <definition name="users" extends="baseLayout">
+        <put-attribute name="title" value="Quản trị người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/users.jsp" />
+    </definition>
+    <definition name="add-user" extends="baseLayout">
+        <put-attribute name="title" value="Thêm tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/pages/add-user.jsp" />
+    </definition>
+    <definition name="emails" extends="baseLayout">
+        <put-attribute name="title" value="Quản trị email trường" />
+        <put-attribute name="content" value="/WEB-INF/pages/emails.jsp" />
+    </definition>
+    <definition name="add-email" extends="baseLayout">
+        <put-attribute name="title" value="Thêm email trường" />
+        <put-attribute name="content" value="/WEB-INF/pages/add-email.jsp" />
+    </definition>
+</tiles-definitions>

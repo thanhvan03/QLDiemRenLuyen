@@ -20,10 +20,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
- * @author PC
+ * @author DELL
  */
 @Entity
 @Table(name = "emailtruong")
@@ -57,8 +58,9 @@ public class Emailtruong implements Serializable {
     @Size(max = 20)
     @Column(name = "masinhvien")
     private String masinhvien;
-    @Column(name = "ngaysinh")
+    @Column(name = "ngaysinh")  
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date ngaysinh;
     @Size(max = 255)
     @Column(name = "quequan")
